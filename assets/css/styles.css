@@ -1,0 +1,205 @@
+body {
+    background-color: black;
+}
+html {
+    font-size: 62.5%;
+}
+.pet_lv {
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: anmPetLv 0.8s linear infinite;
+}
+.pet_lv img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    filter: drop-shadow(0 0 15px orange);
+    animation: anmPetImg 1.2s linear;
+}
+@keyframes anmPetLv {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+@keyframes anmPetImg {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container .title {
+    padding-top: 30px;
+    text-align: center;
+    font-size: 7rem;
+    font-weight: 900;
+    color: #85ffbd;
+    animation: anmTitleGameMath 1.2s linear infinite;
+}
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    .container .title {
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
+    }
+}
+@keyframes anmTitleGameMath {
+    0%,
+    100% {
+        background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
+    }
+    50% {
+        background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+    }
+    75% {
+        background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+        transform: scale(1.1);
+    }
+}
+
+.content {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.content .div_content_item {
+    border-radius: 5px;
+    width: calc(100% / 1 - 20px);
+    height: 400px;
+    background-color: whitesmoke;
+    margin: 0 10px;
+    transition: all 0.5s linear;
+}
+.content_item {
+    display: flex;
+    justify-content: center;
+    height: 60%;
+    border-bottom: 2px solid yellow;
+    padding: 10px;
+    overflow: hidden;
+    max-width: 100%;
+}
+.content_item .the_problem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+}
+.content .div_content_item:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 0 15px whitesmoke, 0 0 25px whitesmoke, 0 0 35px whitesmoke;
+}
+/* các item tính toán */
+.content .content_item .the_problem .character {
+    font-size: 4rem;
+    font-weight: 900;
+    white-space: nowrap;
+}
+.content .content_item .the_problem .character_mark {
+    position: absolute;
+    top: 17%;
+    left: 0;
+}
+.content .content_item .the_problem .number_2 {
+    padding-bottom: 20px;
+    border-bottom: 3px solid black;
+}
+.content .content_item .the_problem .result {
+    margin-bottom: 20px;
+    color: red;
+}
+/* Nhập kết quả vào ô input */
+.input {
+    margin-top: 40px;
+    display: flex;
+    padding: 0 10px;
+    position: relative;
+}
+.input .input_result {
+    height: 70px;
+    margin: 0 auto;
+    text-align: center;
+    outline: none;
+    font-size: 2rem;
+    font-weight: 800;
+    border: 4px solid greenyellow;
+}
+.input .btn_submit {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #fc00ff;
+    transition: all 0.4s linear;
+}
+.input .btn_submit:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+/* nút ổ khoá next lever */
+.lever {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lever i {
+    font-size: 5rem;
+    color: whitesmoke;
+}
+.lever span {
+    margin-left: 30px;
+    font-size: 5rem;
+    color: whitesmoke;
+    font-weight: 900;
+    animation: anmNextLever 1.2s linear infinite;
+}
+.lever span:hover {
+    cursor: pointer;
+}
+@keyframes anmNextLever {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-10%);
+    }
+}
+
+/* kích thước màn hình */
+@media only screen and (max-width: 768px) {
+    .container .title {
+        font-size: 3rem;
+    }
+    .pet_lv img {
+        width: 70px;
+        height: 70px;
+    }
+    .input .btn_submit {
+        width: 50px;
+        height: 50px;
+    }
+}
