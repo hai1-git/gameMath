@@ -47,6 +47,21 @@ function radomLv5() {
     number2.textContent = `${randomNum2}`;
     sum = randomNum1 + randomNum2;
 }
+
+function radomLv6() {
+    const randomNum1 = Math.floor(Math.random() * 999999);
+    const randomNum2 = Math.floor(Math.random() * 999999);
+    number1.textContent = `${randomNum1}`;
+    number2.textContent = `${randomNum2}`;
+    sum = randomNum1 + randomNum2;
+}
+function radomLv7() {
+    const randomNum1 = Math.floor(Math.random() * 9999999);
+    const randomNum2 = Math.floor(Math.random() * 9999999);
+    number1.textContent = `${randomNum1}`;
+    number2.textContent = `${randomNum2}`;
+    sum = randomNum1 + randomNum2;
+}
 function loadLevel(lv) {
     switch (lv) {
         case 1:
@@ -63,6 +78,12 @@ function loadLevel(lv) {
             break;
         case 5:
             radomLv5();
+            break;
+        case 6:
+            radomLv6();
+            break;
+        case 7:
+            radomLv7();
             break;
         default:
             radomLv1(); // Mặc định là level 1 nếu không đúng level
