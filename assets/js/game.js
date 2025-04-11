@@ -105,7 +105,7 @@ const handleInputResult = () => {
         alert("chính xác");
         level++;
         petLv.innerHTML = `<img src="./assets/imgs/lv${level}.png" alt="" />`;
-        if (level == 7) {
+        if (level >= 7) {
             alert("cũng kinh đấy");
         }
         loadLevel(level);
