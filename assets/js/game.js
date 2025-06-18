@@ -1,119 +1,68 @@
-const theProblem = document.querySelector(".the_problem");
 const number1 = document.querySelector(".number_1");
 const number2 = document.querySelector(".number_2");
 const result = document.querySelector(".result");
 const inputResult = document.querySelector(".input_result");
 const btnSubmit = document.querySelector(".btn_submit");
 const petLv = document.querySelector(".pet_lv");
-const imgPetLv = document.querySelector(".img_pet-lv");
-// radom
-let sum;
-let level = 1;
 
-function radomLv1() {
-    const randomNum1 = Math.floor(Math.random() * 9);
-    const randomNum2 = Math.floor(Math.random() * 9);
-    number1.textContent = `${randomNum1}`;
-    number2.textContent = `${randomNum2}`;
-    sum = randomNum1 + randomNum2;
-}
+let correctResult;
+let level = 1; // Bắt đầu từ bảng cửu chương 1
 
-function radomLv2() {
-    const randomNum1 = Math.floor(Math.random() * 99);
-    const randomNum2 = Math.floor(Math.random() * 99);
-    number1.textContent = `${randomNum1}`;
-    number2.textContent = `${randomNum2}`;
-    sum = randomNum1 + randomNum2;
+// Hàm tạo phép nhân ngẫu nhiên theo level (từ 1 đến 9)
+function generateMultiplication(level) {
+    const multiplier = level; // bảng số mấy
+    const multiplicand = Math.floor(Math.random() * 10) + 1; // từ 1 đến 10
+
+    number1.textContent = `${multiplier}`;
+    number2.textContent = `${multiplicand}`;
+    correctResult = multiplier * multiplicand;
 }
 
-function radomLv3() {
-    const randomNum1 = Math.floor(Math.random() * 999);
-    const randomNum2 = Math.floor(Math.random() * 999);
-    number1.textContent = `${randomNum1}`;
-    number2.textContent = `${randomNum2}`;
-    sum = randomNum1 + randomNum2;
-}
-function radomLv4() {
-    const randomNum1 = Math.floor(Math.random() * 9999);
-    const randomNum2 = Math.floor(Math.random() * 9999);
-    number1.textContent = `${randomNum1}`;
-    number2.textContent = `${randomNum2}`;
-    sum = randomNum1 + randomNum2;
-}
-function radomLv5() {
-    const randomNum1 = Math.floor(Math.random() * 99999);
-    const randomNum2 = Math.floor(Math.random() * 99999);
-    number1.textContent = `${randomNum1}`;
-    number2.textContent = `${randomNum2}`;
-    sum = randomNum1 + randomNum2;
+// Cập nhật ảnh pet
+function updatePetImage(level) {
+    const maxLevel = 8;
+    const currentLevel = Math.min(level, maxLevel);
+    petLv.innerHTML = `<img src="./assets/imgs/lv${currentLevel}.png" alt="Level ${currentLevel}" />`;
 }
 
-function radomLv6() {
-    const randomNum1 = Math.floor(Math.random() * 999999);
-    const randomNum2 = Math.floor(Math.random() * 999999);
-    number1.textContent = `${randomNum1}`;
-    number2.textContent = `${randomNum2}`;
-    sum = randomNum1 + randomNum2;
-}
-function radomLv7() {
-    const randomNum1 = Math.floor(Math.random() * 9999999);
-    const randomNum2 = Math.floor(Math.random() * 9999999);
-    number1.textContent = `${randomNum1}`;
-    number2.textContent = `${randomNum2}`;
-    sum = randomNum1 + randomNum2;
-}
-function loadLevel(lv) {
-    switch (lv) {
-        case 1:
-            radomLv1();
-            break;
-        case 2:
-            radomLv2();
-            break;
-        case 3:
-            radomLv3();
-            break;
-        case 4:
-            radomLv4();
-            break;
-        case 5:
-            radomLv5();
-            break;
-        case 6:
-            radomLv6();
-            break;
-        case 7:
-            radomLv7();
-            break;
-        default:
-            radomLv1(); // Mặc định là level 1 nếu không đúng level
-            break;
-    }
-}
-
-// Load câu đầu tiên
-loadLevel(level);
-
-const handleInputResult = () => {
+// Xử lý khi ấn nút kiểm tra
+function handleInputResult() {
     if (!inputResult.value) {
-        alert("bạn chưa nhập dữ liệu");
+        alert("Bạn chưa nhập kết quả!");
         return;
     }
 
-    if (parseInt(inputResult.value) === sum) {
-        result.textContent = `${sum}`;
-        alert("chính xác");
+    const userAnswer = parseInt(inputResult.value);
+
+    if (userAnswer === correctResult) {
+        result.textContent = `${correctResult}`;
+        alert("Chính xác!");
+
         level++;
-        petLv.innerHTML = `<img src="./assets/imgs/lv${level}.png" alt="" />`;
-        if (level >= 7) {
-            alert("cũng kinh đấy");
+        if (level > 8) {
+            alert("Bạn đã hoàn thành bảng cửu chương! 🎉");
+            level = 8;
         }
-        loadLevel(level);
-        inputResult.value = ""; // Reset ô input
+
+        updatePetImage(level);
+        generateMultiplication(level);
+        inputResult.value = "";
         result.textContent = "?";
     } else {
-        alert("sai r làm lại đi");
+        alert("Sai rồi! Làm lại nhé!");
     }
-};
+}
+
+// Sự kiện bấm Enter
+inputResult.addEventListener("keyup", function (e) {
+    if (e.key === "Enter") {
+        handleInputResult();
+    }
+});
 
 btnSubmit.addEventListener("click", handleInputResult);
+
+// Bắt đầu với level đầu tiên
+generateMultiplication(level);
+updatePetImage(level);
+result.textContent = "?";
